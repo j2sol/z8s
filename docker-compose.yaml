@@ -7,10 +7,6 @@ services:
       context: .
       dockerfile: Dockerfile-zuul-fedora
     command: /srv/zuul/bin/zuul-scheduler -d -c /run/secrets/zuul.conf
-    ports:
-      - 8001:8001
-    links:
-      - zuul-zookeeper
     secrets:
       - zuul.conf
   zuul-executor:
@@ -20,8 +16,6 @@ services:
       context: .
       dockerfile: Dockerfile-zuul-fedora
     command: /srv/zuul/bin/zuul-executor -d -c /run/secrets/zuul.conf
-    links:
-      - zuul-zookeeper
     secrets:
       - zuul.conf
   zuul-zookeeper:
@@ -35,8 +29,6 @@ services:
       context: .
       dockerfile: Dockerfile-nodepool-fedora
     command: /srv/nodepool/bin/nodepool-launcher -d
-    links:
-      - zuul-zookeeper
   nodepool-builder:
     #restart: always
     container_name: nodepool-builder
@@ -44,8 +36,6 @@ services:
       context: .
       dockerfile: Dockerfile-nodepool-fedora
     command: /srv/nodepool/bin/nodepool-builder -d
-    links:
-      - zuul-zookeeper
 secrets:
   zuul.conf:
     file: ./zuul.conf.secret
