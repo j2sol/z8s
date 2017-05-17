@@ -1,0 +1,8 @@
+- tenant:
+    name: z8s
+    source:
+      github:
+        config-projects:
+          - j2sol/project-config
+        untrusted-projects:
+          - j2sol/z8s-sandbox

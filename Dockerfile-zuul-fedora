@@ -1,0 +1,22 @@
+FROM fedora:25
+
+RUN dnf makecache && dnf install -y \
+    python-pip \
+    python-virtualenv \
+    git-core \
+    gcc \
+    redhat-rpm-config \
+    openssl-devel \
+    libffi-devel
+RUN git clone https://github.com/j2sol/zuul.git --branch v3-rebase #redo
+RUN virtualenv /srv/zuul
+RUN /srv/zuul/bin/pip install git+https://github.com/sigmavirus24/github3.py.git@8e9ca0056b8fed956b66dafb5398757cd8d8bed9#egg=Github3.py
+RUN /srv/zuul/bin/pip install ./zuul
+RUN mkdir \
+    /etc/zuul/ \
+    /var/lib/zuul
+
+COPY root/etc/zuul/zuul.conf /etc/zuul/zuul.conf
+COPY root/etc/zuul/tenant.yaml /etc/zuul/tenant.yaml
+
+CMD /bin/bash

@@ -1,0 +1,11 @@
+elements-dir: /etc/nodepool/elements
+images-dir: /opt/nodepool/images
+zookeeper-servers:
+  - host: zuul-zookeeper
+    port: 2181
+#
+#diskimages:
+#
+#labels:
+#
+#providers:

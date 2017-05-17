@@ -1,0 +1,23 @@
+FROM fedora:25
+
+RUN dnf makecache && dnf install -y \
+    python-pip \
+    python-virtualenv \
+    git-core \
+    gcc \
+    redhat-rpm-config \
+    debootstrap \
+    qemu-img \
+    parted \
+    kpartx
+RUN git clone https://github.com/openstack-infra/nodepool.git --branch feature/zuulv3
+RUN virtualenv /srv/nodepool
+RUN /srv/nodepool/bin/pip install ./nodepool
+RUN mkdir -p \
+    /etc/nodepool/ \
+    /opt/nodepool/images \
+    /var/lib/nodepool
+
+COPY root/etc/nodepool /etc/nodepool
+
+CMD /bin/bash

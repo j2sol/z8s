@@ -1,0 +1,53 @@
+version: '3'
+services:
+  zuul-scheduler:
+    restart: always
+    container_name: zuul-scheduler
+    build:
+      context: .
+      dockerfile: Dockerfile-zuul-fedora
+    command: /srv/zuul/bin/zuul-scheduler -d
+    ports:
+      - 8001:8001
+    links:
+      - zuul-zookeeper
+  zuul-executor:
+    restart: always
+    container_name: zuul-executor
+    build:
+      context: .
+      dockerfile: Dockerfile-zuul-fedora
+    command: /srv/zuul/bin/zuul-executor -d
+    links:
+      - zuul-zookeeper
+  zuul-merger:
+    restart: always
+    container_name: zuul-merger
+    build:
+      context: .
+      dockerfile: Dockerfile-zuul-fedora
+    command: /srv/zuul/bin/zuul-merger -d
+    links:
+      - zuul-zookeeper
+  zuul-zookeeper:
+    restart: always
+    container_name: zuul-zookeeper
+    image: zookeeper:latest
+  nodepool-launcher:
+    #restart: always
+    container_name: nodepool-launcher
+    build:
+      context: .
+      dockerfile: Dockerfile-nodepool-fedora
+    command: /srv/nodepool/bin/nodepool-launcher -d
+    links:
+      - zuul-zookeeper
+  nodepool-builder:
+    #restart: always
+    container_name: nodepool-builder
+    build:
+      context: .
+      dockerfile: Dockerfile-nodepool-fedora
+    command: /srv/nodepool/bin/nodepool-builder -d
+    links:
+      - zuul-zookeeper
