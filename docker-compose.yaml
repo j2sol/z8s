@@ -20,15 +20,6 @@ services:
     command: /srv/zuul/bin/zuul-executor -d
     links:
       - zuul-zookeeper
-  zuul-merger:
-    restart: always
-    container_name: zuul-merger
-    build:
-      context: .
-      dockerfile: Dockerfile-zuul-fedora
-    command: /srv/zuul/bin/zuul-merger -d
-    links:
-      - zuul-zookeeper
   zuul-zookeeper:
     restart: always
     container_name: zuul-zookeeper
