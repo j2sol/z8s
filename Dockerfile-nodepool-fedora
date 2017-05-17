@@ -19,5 +19,3 @@ RUN mkdir -p \
     /var/lib/nodepool
 
 COPY root/etc/nodepool /etc/nodepool
-
-CMD /bin/bash
