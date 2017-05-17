@@ -2,7 +2,6 @@ version: '3.1'
 services:
   zuul-scheduler:
     restart: always
-    container_name: zuul-scheduler
     build:
       context: .
       dockerfile: Dockerfile-zuul-fedora
@@ -13,7 +12,6 @@ services:
       - zuul.conf
   zuul-executor:
     restart: always
-    container_name: zuul-executor
     build:
       context: .
       dockerfile: Dockerfile-zuul-fedora
@@ -22,18 +20,15 @@ services:
       - zuul.conf
   zuul-zookeeper:
     restart: always
-    container_name: zuul-zookeeper
     image: zookeeper:latest
   nodepool-launcher:
     #restart: always
-    container_name: nodepool-launcher
     build:
       context: .
       dockerfile: Dockerfile-nodepool-fedora
     command: /srv/nodepool/bin/nodepool-launcher -d
   nodepool-builder:
     #restart: always
-    container_name: nodepool-builder
     build:
       context: .
       dockerfile: Dockerfile-nodepool-fedora
