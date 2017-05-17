@@ -1,4 +1,4 @@
-version: '3'
+version: '3.1'
 services:
   zuul-scheduler:
     restart: always
@@ -6,20 +6,24 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-zuul-fedora
-    command: /srv/zuul/bin/zuul-scheduler -d
+    command: /srv/zuul/bin/zuul-scheduler -d -c /run/secrets/zuul.conf
     ports:
       - 8001:8001
     links:
       - zuul-zookeeper
+    secrets:
+      - zuul.conf
   zuul-executor:
     restart: always
     container_name: zuul-executor
     build:
       context: .
       dockerfile: Dockerfile-zuul-fedora
-    command: /srv/zuul/bin/zuul-executor -d
+    command: /srv/zuul/bin/zuul-executor -d -c /run/secrets/zuul.conf
     links:
       - zuul-zookeeper
+    secrets:
+      - zuul.conf
   zuul-zookeeper:
     restart: always
     container_name: zuul-zookeeper
@@ -42,3 +46,6 @@ services:
     command: /srv/nodepool/bin/nodepool-builder -d
     links:
       - zuul-zookeeper
+secrets:
+  zuul.conf:
+    file: ./zuul.conf.secret

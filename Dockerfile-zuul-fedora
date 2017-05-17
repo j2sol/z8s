@@ -16,7 +16,6 @@ RUN mkdir \
     /etc/zuul/ \
     /var/lib/zuul
 
-COPY root/etc/zuul/zuul.conf /etc/zuul/zuul.conf
 COPY root/etc/zuul/tenant.yaml /etc/zuul/tenant.yaml
 
 CMD /bin/bash
