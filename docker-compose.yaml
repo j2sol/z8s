@@ -38,6 +38,9 @@ services:
     privileged: true
     secrets:
       - clouds.yaml
+    volumes:
+      - /opt/nodepool/images
+      - /tmp/
 secrets:
   zuul.conf:
     file: ./zuul.conf.secret
