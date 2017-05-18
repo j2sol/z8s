@@ -27,12 +27,19 @@ services:
       context: .
       dockerfile: Dockerfile-nodepool-fedora
     command: /srv/nodepool/bin/nodepool-launcher -d
+    secrets:
+      - clouds.yaml
   nodepool-builder:
     #restart: always
     build:
       context: .
       dockerfile: Dockerfile-nodepool-fedora
     command: /srv/nodepool/bin/nodepool-builder -d
+    privileged: true
+    secrets:
+      - clouds.yaml
 secrets:
   zuul.conf:
     file: ./zuul.conf.secret
+  clouds.yaml:
+    file: ./clouds.yaml.secret

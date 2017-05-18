@@ -6,17 +6,27 @@ RUN dnf makecache && dnf install -y \
     git-core \
     gcc \
     redhat-rpm-config \
+    which \
+    findutils \
+    procps-ng \
+    sudo \
+    perl \
     debootstrap \
     qemu-img \
     parted \
+    cpio \
+    gnupg \
     kpartx
 RUN git clone https://github.com/openstack-infra/nodepool.git --branch feature/zuulv3
 RUN virtualenv /srv/nodepool
 RUN /srv/nodepool/bin/pip install ./nodepool
+RUN pip install diskimage-builder
 RUN mkdir -p \
     /etc/nodepool/ \
     /opt/nodepool/images \
-    /var/lib/nodepool
+    /var/lib/nodepool/ \
+    ~/.config/openstack
+RUN ln -s /run/secrets/clouds.yaml ~/.config/openstack/clouds.yaml
 
 COPY root/etc/nodepool /etc/nodepool
 
