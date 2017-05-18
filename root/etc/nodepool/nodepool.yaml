@@ -40,8 +40,8 @@ providers:
     pools:
       - name: main
         max-servers: 1
-        #networks:
-        #  - nodepool-v3
+        networks:
+          - internal
         labels:
           - name: ubuntu-xenial
             min-ram: 1026
