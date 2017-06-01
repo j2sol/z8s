@@ -16,6 +16,12 @@ RUN mkdir \
     /etc/zuul/ \
     /var/lib/zuul
 
+RUN useradd -u 1000 zuul
+RUN chown -R zuul:zuul \
+    /var/lib/zuul
+
 COPY root/etc/zuul/tenant.yaml /etc/zuul/tenant.yaml
+RUN chown zuul:zuul /etc/zuul/tenant.yaml
 
 CMD /bin/bash
+USER zuul
