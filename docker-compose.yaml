@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-zuul-fedora
+      args:
+        ZUUL_VER: ${ZUUL_VER:-feature/zuulv3}
+        ZUUL_REPO: ${ZUUL_REPO:-https://github.com/openstack-infra/zuul.git}
     command: /srv/zuul/bin/zuul-scheduler -d -c /run/secrets/zuul.conf
     ports:
       - 8001:8001
@@ -19,6 +22,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-zuul-fedora
+      args:
+        ZUUL_VER: ${ZUUL_VER:-feature/zuulv3}
+        ZUUL_REPO: ${ZUUL_REPO:-https://github.com/openstack-infra/zuul.git}
     command: /srv/zuul/bin/zuul-executor -d -c /run/secrets/zuul.conf
     secrets:
       - source: zuul.conf
