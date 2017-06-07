@@ -25,7 +25,6 @@ services:
         target: zuul.conf
         uid: '1000'
         gid: '1000'
-      - zuul.conf
   zuul-zookeeper:
     restart: always
     image: zookeeper:latest
