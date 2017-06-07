@@ -14,6 +14,7 @@ services:
         uid: '1000'
         gid: '1000'
   zuul-executor:
+    user: root
     restart: always
     build:
       context: .
