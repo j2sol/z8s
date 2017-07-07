@@ -6,3 +6,4 @@
           - j2sol/project-config
         untrusted-projects:
           - j2sol/z8s-sandbox
+          - openstack-infra/zuul-jobs
