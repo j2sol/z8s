@@ -8,3 +8,8 @@ Copy zuul.conf to zuul.conf.secret and edit to set the github API key (or integr
 Then: $ docker-compose build
 
 To run: $ docker-compose up
+
+To run with a local checkout of zuul: $ docker-compose -f docker-compose.yaml -f devel.yaml up
+
+The checkout of zuul is volume mounted into the zuul containers. Use the ENV var $ZUUL_SRC to define
+the local path where zuul is checked out.
