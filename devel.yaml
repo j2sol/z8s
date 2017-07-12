@@ -6,3 +6,6 @@ services:
   zuul-executor:
     volumes:
       - ${ZUUL_SRC:-~/src/zuul}:/zuul/
+  zuul-web:
+    volumes:
+      - ${ZUUL_SRC:-~/src/zuul}:/zuul/

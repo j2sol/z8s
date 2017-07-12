@@ -31,6 +31,23 @@ services:
         target: zuul.conf
         uid: '1000'
         gid: '1000'
+  zuul-web:
+    user: root
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-zuul-fedora
+      args:
+        ZUUL_VER: ${ZUUL_VER:-feature/zuulv3}
+        ZUUL_REPO: ${ZUUL_REPO:-https://github.com/openstack-infra/zuul.git}
+    command: /srv/zuul/bin/zuul-web -d -c /run/secrets/zuul.conf
+    ports:
+      - 9000:9000
+    secrets:
+      - source: zuul.conf
+        target: zuul.conf
+        uid: '1000'
+        gid: '1000'
   zuul-zookeeper:
     restart: always
     image: zookeeper:latest
