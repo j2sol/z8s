@@ -3,9 +3,15 @@ services:
   zuul-scheduler:
     volumes:
       - ${ZUUL_SRC:-~/src/zuul}:/zuul/
+    ports:
+      - 4444:4444
   zuul-executor:
     volumes:
       - ${ZUUL_SRC:-~/src/zuul}:/zuul/
+    ports:
+      - 4445:4444
   zuul-web:
     volumes:
       - ${ZUUL_SRC:-~/src/zuul}:/zuul/
+    ports:
+      - 4446:4444
